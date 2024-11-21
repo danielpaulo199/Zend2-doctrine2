@@ -2,100 +2,109 @@
 
 namespace Application\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Entity
- * @ORM\Table(name="veiculos")
+ * @Entity
  */
 class Veiculo
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
+     * @Id
+     * @GeneratedValue
+     * @Column(type="integer")
      */
-    private $id;
+    private int $id;
 
-    /** @ORM\Column(type="string", length=7) */
-    private $placa;
+    /**
+     * @Column(type="string", length=7)
+    */
+    private string $placa;
 
-    /** @ORM\Column(type="string", length=30, nullable=true) */
-    private $renavam;
+    /**
+     * @Column(type="string", length=30, nullable=true)
+    */
+    private int $renavam;
 
-    /** @ORM\Column(type="string", length=20) */
-    private $modelo;
+    /**
+     * @Column(type="string", length=20)
+     */
+    private string $modelo;
 
-    /** @ORM\Column(type="string", length=20) */
-    private $marca;
+    /**
+     * @Column(type="string", length=20)
+     */
+    private string $marca;
 
-    /** @ORM\Column(type="integer") */
-    private $ano;
+    /**
+     * @Column(type="integer")
+     */
+    private int $ano;
 
-    /** @ORM\Column(type="string", length=20) */
-    private $cor;
+    /**
+     * @Column(type="string", length=20)
+     */
+    private string $cor;
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getPlaca()
+    public function getPlaca(): string
     {
         return $this->placa;
     }
 
-    public function setPlaca($placa)
+    public function setPlaca(string $placa): void
     {
         $this->placa = $placa;
     }
 
-    public function getRenavam()
+    public function getRenavam(): int
     {
         return $this->renavam;
     }
 
-    public function setRenavam($renavam)
+    public function setRenavam(int $renavam): void
     {
         $this->renavam = $renavam;
     }
 
-    public function getModelo()
+    public function getModelo(): string
     {
         return $this->modelo;
     }
 
-    public function setModelo($modelo)
+    public function setModelo(string $modelo): void
     {
         $this->modelo = $modelo;
     }
 
-    public function getMarca()
+    public function getMarca(): string
     {
         return $this->marca;
     }
 
-    public function setMarca($marca)
+    public function setMarca(string $marca): void
     {
         $this->marca = $marca;
     }
 
-    public function getAno()
+    public function getAno(): int
     {
         return $this->ano;
     }
 
-    public function setAno($ano)
+    public function setAno(int $ano): void
     {
         $this->ano = $ano;
     }
 
-    public function getCor()
+    public function getCor(): string
     {
         return $this->cor;
     }
 
-    public function setCor($cor)
+    public function setCor(string $cor): void
     {
         $this->cor = $cor;
     }

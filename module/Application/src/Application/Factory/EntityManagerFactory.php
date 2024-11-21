@@ -2,23 +2,27 @@
 
 namespace Application\Factory;
 
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-
-require_once "vendor/autoload.php";
+use Doctrine\ORM\{EntityManager, EntityManagerInterface, ORMException, Tools\Setup};
 
 class EntityManagerFactory
 {
-    public static function factory()
+    /**
+     * @return EntityManagerInterface
+     * @throws ORMException
+     */
+    public static function factory(): EntityManagerInterface
     {
-        $isDevMode = true;
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
-
-        $conn = array(
-            'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/db.sqlite',
+        $rootDir = __DIR__ . '/../..';
+        $config = Setup::createAnnotationMetadataConfiguration([
+            $rootDir . '/src'],
+            true
         );
 
-        return EntityManager::create($conn, $config);
+        $connection = [
+            'driver' => 'pdo_sqlite',
+            'path' => __DIR__ . '/../data/banco.sqlite'
+        ];
+
+        return EntityManager::create($connection, $config);
     }
 }

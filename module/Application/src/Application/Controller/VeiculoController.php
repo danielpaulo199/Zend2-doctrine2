@@ -5,33 +5,38 @@ use Application\Entity\Veiculo;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Factory\EntityManagerFactory;
+use Application\Form\VeiculoForm;
+use Doctrine\ORM\{EntityManagerInterface, EntityRepository};
 
 class VeiculoController extends AbstractActionController
 {
-    private $entityManager;
+    private EntityRepository $veiculosRepository;
+    private EntityManagerInterface $entityManager;
 
     public function __construct()
     {
         $this->entityManager = EntityManagerFactory::factory();
+
+        $this->veiculosRepository = $this->entityManager
+            ->getRepository(Veiculo::class);
     }
 
     public function indexAction()
     {
-        die('estou no index veiculo');
-        $veiculos = $this->entityManager->getRepository(Veiculo::class)->findAll();
         return new ViewModel([
-            'veiculos' => $veiculos,
+            'veiculos' => $this->veiculosRepository->findAll(),
         ]);
     }
 
-    // Cadastrar um novo veículo
-    public function addAction()
+    public function cadastrarAction()
     {
-        $veiculo = new Veiculo();
         $form = new VeiculoForm();
 
         if ($this->getRequest()->isPost()) {
+
             $data = $this->getRequest()->getPost();
+
+            $veiculo = new Veiculo();
             $veiculo->setPlaca($data['placa']);
             $veiculo->setRenavam($data['renavam']);
             $veiculo->setModelo($data['modelo']);
@@ -50,10 +55,10 @@ class VeiculoController extends AbstractActionController
         ]);
     }
 
-    public function editAction()
+    public function editarAction()
     {
         $id = (int) $this->params()->fromRoute('id');
-        $veiculo = $this->entityManager->find(Veiculo::class, $id);
+        $veiculo = $this->veiculosRepository->find($id);
 
         if (!$veiculo) {
             return $this->redirect()->toRoute('veiculo');
@@ -82,11 +87,12 @@ class VeiculoController extends AbstractActionController
         ]);
     }
 
-    public function deleteAction()
+    public function deletarAction()
     {
         $id = (int) $this->params()->fromRoute('id');
 
-        $veiculo = $this->entityManager->find(Veiculo::class, $id);
+        $veiculo = $this->veiculosRepository->find($id);
+
         if ($veiculo) {
             $this->entityManager->remove($veiculo);
             $this->entityManager->flush();

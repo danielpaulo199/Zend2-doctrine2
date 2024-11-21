@@ -52,54 +52,65 @@ return array(
                     ),
                 ),
             ),
-
-            'veiculo' => [
+            'veiculo' => array(
                 'type'    => 'Literal',
-                'options' => [
-                    'route'    => '/veiculos',
-                    'defaults' => [
-                        'controller' => 'Application\Controller\Veiculos',
-                        'action'     => 'index',
-                    ],
-                ],
+                'options' => array(
+                    'route'    => '/veiculo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Veiculo',
+                        'action'        => 'index',
+                    ),
+                ),
                 'may_terminate' => true,
-                'child_routes'  => [
-                    'add' => [
+                'child_routes' => array(
+                    'default' => array(
                         'type'    => 'Segment',
-                        'options' => [
-                            'route'    => '/add',
-                            'defaults' => [
-                                'action' => 'add',
-                            ],
-                        ],
-                    ],
-                    'edit' => [
-                        'type'    => 'Segment',
-                        'options' => [
-                            'route'    => '/edit/:id',
-                            'defaults' => [
-                                'action' => 'edit',
-                            ],
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                        ],
-                    ],
-                    'delete' => [
-                        'type'    => 'Segment',
-                        'options' => [
-                            'route'    => '/delete/:id',
-                            'defaults' => [
-                                'action' => 'delete',
-                            ],
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                        ],
-                    ],
+                        'options' => array(
+                            'route'    => '/[:controller[/:action]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'cadastrar-veiculo' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/veiculos/cadastrar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Veiculo',
+                        'action'        => 'cadastrar',
+                    ),
                 ],
             ],
-
+            'deletar-veiculo' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/veiculos/cadastrar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Veiculo',
+                        'action'        => 'deletar',
+                    ),
+                ],
+            ],
+            'editar-veiculo' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/veiculos/cadastrar',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Veiculo',
+                        'action'        => 'editar',
+                    ),
+                ],
+            ],
         ),
     ),
 
@@ -125,7 +136,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Veiculos' => Controller\VeiculoController::class,
+            'Application\Controller\Veiculo' => Controller\VeiculoController::class,
         ),
     ),
 
