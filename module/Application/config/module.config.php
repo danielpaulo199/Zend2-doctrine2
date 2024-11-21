@@ -52,63 +52,18 @@ return array(
                     ),
                 ),
             ),
-            'veiculo' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/veiculo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Veiculo',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'cadastrar-veiculo' => [
-                'type' => 'Literal',
+            'veiculos' => [
+                'type' => 'segment',
                 'options' => [
-                    'route' => '/veiculos/cadastrar',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Veiculo',
-                        'action'        => 'cadastrar',
-                    ),
-                ],
-            ],
-            'deletar-veiculo' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/veiculos/cadastrar',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Veiculo',
-                        'action'        => 'deletar',
-                    ),
-                ],
-            ],
-            'editar-veiculo' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/veiculos/cadastrar',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Veiculo',
-                        'action'        => 'editar',
-                    ),
+                    'route' => '/veiculos[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\VeiculoController::class,
+                        'action' => 'index',
+                    ],
                 ],
             ],
         ),
@@ -121,6 +76,7 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            Service\VeiculoService::class => Factory\VeiculoService::class,
         ),
     ),
     'translator' => array(
@@ -134,9 +90,11 @@ return array(
         ),
     ),
     'controllers' => array(
+        'factories' => [
+            Controller\VeiculoController::class => Factory\VeiculoControllerFactory::class,
+        ],
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Veiculo' => Controller\VeiculoController::class,
         ),
     ),
 

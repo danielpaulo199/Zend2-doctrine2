@@ -2,29 +2,24 @@
 namespace Application\Controller;
 
 use Application\Entity\Veiculo;
+use Application\Form\VeiculoForm;
+use Application\Service\VeiculoServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Factory\EntityManagerFactory;
-use Application\Form\VeiculoForm;
-use Doctrine\ORM\{EntityManagerInterface, EntityRepository};
 
 class VeiculoController extends AbstractActionController
 {
-    private EntityRepository $veiculosRepository;
-    private EntityManagerInterface $entityManager;
+    private VeiculoServiceInterface $veiculoService;
 
-    public function __construct()
+    public function __construct(VeiculoServiceInterface $veiculoService)
     {
-        $this->entityManager = EntityManagerFactory::factory();
-
-        $this->veiculosRepository = $this->entityManager
-            ->getRepository(Veiculo::class);
+        $this->veiculoService = $veiculoService;
     }
 
     public function indexAction()
     {
         return new ViewModel([
-            'veiculos' => $this->veiculosRepository->findAll(),
+            'veiculos' => $this->veiculoService->getAll(),
         ]);
     }
 
@@ -44,8 +39,7 @@ class VeiculoController extends AbstractActionController
             $veiculo->setAno($data['ano']);
             $veiculo->setCor($data['cor']);
 
-            $this->entityManager->persist($veiculo);
-            $this->entityManager->flush();
+            $this->veiculoService->cadastrar($veiculo);
 
             return $this->redirect()->toRoute('veiculo');
         }
@@ -58,7 +52,7 @@ class VeiculoController extends AbstractActionController
     public function editarAction()
     {
         $id = (int) $this->params()->fromRoute('id');
-        $veiculo = $this->veiculosRepository->find($id);
+        $veiculo = $this->veiculoService->getById($id);
 
         if (!$veiculo) {
             return $this->redirect()->toRoute('veiculo');
@@ -76,7 +70,7 @@ class VeiculoController extends AbstractActionController
             $veiculo->setAno($data['ano']);
             $veiculo->setCor($data['cor']);
 
-            $this->entityManager->flush();
+            $this->veiculoService->atualizar($veiculo);
 
             return $this->redirect()->toRoute('veiculo');
         }
@@ -91,11 +85,10 @@ class VeiculoController extends AbstractActionController
     {
         $id = (int) $this->params()->fromRoute('id');
 
-        $veiculo = $this->veiculosRepository->find($id);
+        $veiculo = $this->veiculoService->getById($id);
 
         if ($veiculo) {
-            $this->entityManager->remove($veiculo);
-            $this->entityManager->flush();
+            $this->veiculoService->deletar($veiculo);
         }
 
         return $this->redirect()->toRoute('veiculo');
