@@ -76,7 +76,7 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-            Service\VeiculoService::class => Factory\VeiculoService::class,
+            Service\VeiculoService::class => Factory\VeiculoServiceFactory::class,
         ),
     ),
     'translator' => array(

@@ -10,7 +10,8 @@ class VeiculoControllerFactory
 {
     public function __invoke(ContainerInterface $DIcontainer)
     {
-        $vehicleService = $DIcontainer->get(VeiculoService::class);
+        $parentLocator = $DIcontainer->getServiceLocator();
+        $vehicleService = $parentLocator->get(VeiculoService::class);
         return new VeiculoController($vehicleService);
     }
 }
