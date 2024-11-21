@@ -15,7 +15,6 @@ class VeiculoController extends AbstractActionController
         $this->entityManager = EntityManagerFactory::factory();
     }
 
-    // Listar todos os veículos
     public function indexAction()
     {
         die('estou no index veiculo');
