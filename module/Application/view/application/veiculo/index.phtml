@@ -23,8 +23,8 @@
         <td><?= $veiculo->getAno() ?></td>
         <td><?= $veiculo->getCor() ?></td>
         <td>
-          <a href="<?= $this->url('veiculos', ['action' => 'editar']); ?>" class="btn btn-warning btn-sm">Editar</a>
-          <a href="<?= $this->url('veiculos', ['action' => 'deletar']); ?>" class="btn btn-danger btn-sm">Remover</a>
+          <a href="<?= $this->url('veiculos', ['action' => 'editar', 'id' => $veiculo->getId()]); ?>" onclick="return confirm('Deseja excluir esse veíiculo?')" class="btn btn-warning btn-sm">Editar</a>
+          <a href="<?= $this->url('veiculos', ['action' => 'deletar', 'id' => $veiculo->getId()]); ?>" onclick="return confirm('Deseja excluir esse veíiculo?')" class="btn btn-danger btn-sm">Remover</a>
         </td>
       </tr>
     <?php endforeach; ?>
