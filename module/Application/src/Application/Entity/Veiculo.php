@@ -108,4 +108,29 @@ class Veiculo
     {
         $this->cor = $cor;
     }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->id,
+            'placa' => $this->placa,
+            'renavam' => $this->renavam,
+            'modelo' => $this->modelo,
+            'marca' => $this->marca,
+            'ano' => $this->ano,
+            'cor' => $this->cor,
+        ];
+    }
+
+    public function exchangeArray(array $array)
+    {
+        $this->placa = isset($array['placa']) ? $array['placa'] : null;
+        $this->renavam = isset($array['renavam']) ? $array['renavam'] : null;
+        $this->modelo = isset($array['modelo']) ? $array['modelo'] : null;
+        $this->marca = isset($array['marca']) ? $array['marca'] : null;
+        $this->ano = isset($array['ano']) ? $array['ano'] : null;
+        $this->cor = isset($array['cor']) ? $array['cor'] : null;
+
+        return $this;
+    }
 }
