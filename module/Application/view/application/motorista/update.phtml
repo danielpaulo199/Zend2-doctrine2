@@ -1,0 +1,41 @@
+<div class="card">
+
+    <div class="card-header d-flex align-items-center">
+        <h2>Editar Motorista</h2>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post" name="motoristas" class="row g-3" id="motorista">
+
+            <div class="col-md-6">
+                <label for="nome" class="form-label">Nome</label>
+                <?= $this->formRow($form->get('nome')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="rg" class="form-label">RG</label>
+                <?= $this->formRow($form->get('rg')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="cpf" class="form-label">CPF</label>
+                <?= $this->formRow($form->get('cpf')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="telefone" class="form-label">Telefone</label>
+                <?= $this->formRow($form->get('telefone')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="veiculo" class="form-label">Veículo</label>
+                <?= $this->formRow($form->get('veiculo')); ?>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" name="submit" id="submitbutton" class="btn btn-success mt-3">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
