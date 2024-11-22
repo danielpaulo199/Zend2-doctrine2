@@ -1,0 +1,47 @@
+<div class="card">
+
+    <div class="card-header">
+        <h2>Editar Veículo</h2>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post" name="vehicle" class="row g-3" id="vehicle">
+
+            <div class="col-md-6">
+                <label for="placa" class="form-label">Placa</label>
+                <?= $this->formRow($form->get('placa')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="renavam" class="form-label">Renavam</label>
+                <?= $this->formRow($form->get('renavam')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="modelo" class="form-label">modeloo</label>
+                <?= $this->formRow($form->get('modelo')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="marca" class="form-label">Marca</label>
+                <?= $this->formRow($form->get('marca')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="ano" class="form-label">Ano</label>
+                <?= $this->formRow($form->get('ano')); ?>
+            </div>
+
+            <div class="col-md-6">
+                <label for="cor" class="form-label">Cor</label>
+                <?= $this->formRow($form->get('cor')); ?>
+            </div>
+
+            <div>
+                <button type="submit" name="submit" id="submitbutton" class="btn btn-success">Atualizar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
