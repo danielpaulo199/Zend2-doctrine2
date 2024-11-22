@@ -23,7 +23,7 @@ try {
 
     // Gera o banco de dados e as tabelas
     if (!empty($metadatas)) {
-        $schemaTool->createSchema($metadatas);
+        $schemaTool->updateSchema($metadatas);
         echo "Banco de dados e tabelas criados com sucesso!";
     } else {
         echo "Nenhuma entidade encontrada para gerar as tabelas.";
