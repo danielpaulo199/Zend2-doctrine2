@@ -66,6 +66,20 @@ return array(
                     ],
                 ],
             ],
+            'motoristas' => [
+                'type' => 'segment',
+                'options' => [
+                    'route' => '/motoristas[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\MotoristaController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
         ),
     ),
 
@@ -77,6 +91,7 @@ return array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
             Service\VeiculoService::class => Factory\VeiculoServiceFactory::class,
+            Service\MotoristaService::class => Factory\MotoristaServiceFactory::class,
         ),
     ),
     'translator' => array(
