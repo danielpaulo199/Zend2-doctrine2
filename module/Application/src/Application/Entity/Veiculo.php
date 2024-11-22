@@ -22,7 +22,7 @@ class Veiculo
     /**
      * @Column(type="string", length=30, nullable=true)
     */
-    private int $renavam;
+    private string $renavam;
 
     /**
      * @Column(type="string", length=20)
@@ -59,12 +59,12 @@ class Veiculo
         $this->placa = $placa;
     }
 
-    public function getRenavam(): int
+    public function getRenavam(): string
     {
         return $this->renavam;
     }
 
-    public function setRenavam(int $renavam): void
+    public function setRenavam(string $renavam): void
     {
         $this->renavam = $renavam;
     }

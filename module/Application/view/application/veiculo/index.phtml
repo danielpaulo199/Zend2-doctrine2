@@ -1,4 +1,39 @@
+<h1>Lista de Veículos</h1>
 
-<h1>CRUD DE VEICULOS</h1>
+<?php if (!empty($veiculos)): ?>
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Renavam</th>
+      <th>Modelo</th>
+      <th>Marca</th>
+      <th>Ano</th>
+      <th>Cor</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($veiculos as $veiculo): ?>
+      <tr>
+        <td><?= $veiculo->getPlaca() ?></td>
+        <td><?= $veiculo->getRenavam() ?></td>
+        <td><?= $veiculo->getModelo() ?></td>
+        <td><?= $veiculo->getMarca() ?></td>
+        <td><?= $veiculo->getAno() ?></td>
+        <td><?= $veiculo->getCor() ?></td>
+        <td>
+          <a href="<?= $this->url('veiculos', ['action' => 'editar']); ?>" class="btn btn-warning btn-sm">Editar</a>
+          <a href="<?= $this->url('veiculos', ['action' => 'deletar']); ?>" class="btn btn-danger btn-sm">Remover</a>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table>
+<?php else: ?>
+  <p>Nenhum veículo encontrado.</p>
+<?php endif; ?>
 
-<?php echo $this->veiculos; ?>
+<p>
+  <a href="<?= $this->url('veiculos', ['action' => 'cadastrar']); ?>" class="btn btn-success">Cadastrar Veículo</a>
+</p>
